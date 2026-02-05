@@ -1,7 +1,8 @@
 import pygame
-from modules.constants import SCREEN_WIDTH,SCREEN_HEIGHT
-from modules.logger import log_state
-from modules.player import Player
+from modules import SCREEN_WIDTH
+from modules import SCREEN_HEIGHT
+from modules import log_state
+from modules import Player
 
 def main():
     print(f"Starting Asteroids with the pygame version: {pygame.version.ver}")
