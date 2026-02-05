@@ -1,4 +1,6 @@
 import pygame
+from pygame.sprite import Group
+from pygame.time import Clock
 from modules import SCREEN_WIDTH
 from modules import SCREEN_HEIGHT
 from modules import log_state
@@ -11,8 +13,14 @@ def main():
 
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pygame.time.Clock()
+    clock: Clock = pygame.time.Clock()
     dt: int = 0 # delta time
+
+    #create groups to manage the game objects
+    updatable: Group = pygame.sprite.Group()
+    drawable: Group = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
     player: Player = Player((SCREEN_WIDTH/2),(SCREEN_HEIGHT/2))
 
     while True:
@@ -21,10 +29,11 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        player.update(dt)
+        updatable.update(dt)
 
         screen.fill("black")
-        player.draw(screen)
+        for item in drawable:
+            item.draw(screen)
         pygame.display.flip()
         
         clock.tick(60) #pauses game loop for 1/60th of a second
