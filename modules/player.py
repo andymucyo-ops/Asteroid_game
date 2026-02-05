@@ -1,14 +1,13 @@
 import pygame # noqa: F401
 from .circleshape import CircleShape
-from .constants import LINE_WIDTH, PLAYER_RADIUS
+from .constants import LINE_WIDTH, PLAYER_RADIUS, PLAYER_TURN_SPEED
 
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x,y,PLAYER_RADIUS)
         self.rotation = 0
 
-        # in the Player class
-    def triangle(self):
+    def triangle(self) -> list[int]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
         a = self.position + forward * self.radius
@@ -18,3 +17,17 @@ class Player(CircleShape):
     
     def draw(self, screen):
        pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH) 
+
+    def rotate(self, dt: float) -> float :
+        self.rotation += (PLAYER_TURN_SPEED * dt)
+
+    def update(self, dt: float) -> float:
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            return self.rotate(dt)
+
+        if keys[pygame.K_d]:
+            return self.rotate(-dt)
+
+

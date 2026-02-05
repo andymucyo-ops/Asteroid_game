@@ -11,7 +11,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
-    dt: int = 0 # delta time
+    dt: float = 0 # delta time
     player: Player = Player((SCREEN_WIDTH/2),(SCREEN_HEIGHT/2))
 
     while True:
@@ -21,10 +21,16 @@ def main():
                 return
 
         screen.fill("black")
+
         player.draw(screen)
+        
         pygame.display.flip()
+        
         clock.tick(60) #pauses game loop for 1/60th of a second
-        dt = clock.tick()
+        player.update(dt)
+        
+        dt: float= clock.tick()
+        
 
 
 if __name__ == "__main__":
