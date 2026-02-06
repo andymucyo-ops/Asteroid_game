@@ -8,7 +8,10 @@ from .constants import (
     ASTEROID_KINDS,
     ASTEROID_MIN_RADIUS,
     ASTEROID_MAX_RADIUS,
-    ASTEROID_SPAWN_RATE_SECONDS
+    ASTEROID_SPAWN_RATE_SECONDS,
+    PLAYER_SHOT_SPEED,
+    SHOT_RADIUS
+    
 )
 from .logger import log_state, log_event 
 from .circleshape import CircleShape 
