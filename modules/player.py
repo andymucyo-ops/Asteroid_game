@@ -1,7 +1,7 @@
 import pygame
-from pygame.math import Vector2 # noqa: F401
-from .circleshape import CircleShape
-from .constants import LINE_WIDTH, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_TURN_SPEED
+from pygame.math import Vector2
+from modules.circleshape import CircleShape
+from modules.constants import LINE_WIDTH, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_TURN_SPEED
 
 class Player(CircleShape):
     def __init__(self, x, y):
