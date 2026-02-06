@@ -5,6 +5,8 @@ from modules import SCREEN_WIDTH
 from modules import SCREEN_HEIGHT
 from modules import log_state
 from modules import Player
+from modules import Asteroid
+from modules import AsteroidField
 
 def main():
     print(f"Starting Asteroids with the pygame version: {pygame.version.ver}")
@@ -19,6 +21,13 @@ def main():
     #create groups to manage the game objects
     updatable: Group = pygame.sprite.Group()
     drawable: Group = pygame.sprite.Group()
+    asteroids: Group = pygame.sprite.Group()
+
+    AsteroidField.containers = updatable
+    asteroidfield: AsteroidField = AsteroidField()
+
+    Asteroid.containers = (asteroids, updatable, drawable)
+    # asteroid: Asteroid = Asteroid()
 
     Player.containers = (updatable, drawable)
     player: Player = Player((SCREEN_WIDTH/2),(SCREEN_HEIGHT/2))
@@ -32,8 +41,10 @@ def main():
         updatable.update(dt)
 
         screen.fill("black")
+
         for item in drawable:
             item.draw(screen)
+
         pygame.display.flip()
         
         clock.tick(60) #pauses game loop for 1/60th of a second
