@@ -1,4 +1,5 @@
 import pygame
+import sys
 from pygame.sprite import Group
 from pygame.time import Clock
 from modules import SCREEN_WIDTH
@@ -7,6 +8,7 @@ from modules import log_state
 from modules import Player
 from modules import Asteroid
 from modules import AsteroidField
+from modules import log_event
 
 def main():
     print(f"Starting Asteroids with the pygame version: {pygame.version.ver}")
@@ -16,7 +18,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock: Clock = pygame.time.Clock()
-    dt: int = 0 # delta time
+    dt: int = 0 # delta time (time ellapsed between frames)
 
     #create groups to manage the game objects
     updatable: Group = pygame.sprite.Group()
@@ -33,21 +35,34 @@ def main():
 
     while True:
         log_state()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
 
+        # update game state
         updatable.update(dt)
 
+        #check for asteroid collision wioth player
+        for asteroid in asteroids:
+            if asteroid.collision_with(player):
+                log_event("player_hit")
+                print("GAME OVER!")
+                sys.exit()
+
+
+        # add background
         screen.fill("black")
 
+        # draw items 
         for item in drawable:
             item.draw(screen)
 
+        # render all to screen
         pygame.display.flip()
         
-        clock.tick(60) #pauses game loop for 1/60th of a second
-        
+        # manage FPS
+        clock.tick(60) 
         dt: int= clock.tick(60)/1000
         
 
