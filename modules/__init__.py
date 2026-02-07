@@ -10,7 +10,8 @@ from .constants import (
     ASTEROID_MAX_RADIUS,
     ASTEROID_SPAWN_RATE_SECONDS,
     PLAYER_SHOT_SPEED,
-    SHOT_RADIUS
+    SHOT_RADIUS,
+    PLAYER_SHOOT_COOLDOWN_SECONDS
     
 )
 from .logger import log_state, log_event 
