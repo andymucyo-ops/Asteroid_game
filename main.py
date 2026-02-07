@@ -48,12 +48,21 @@ def main():
         # update game state
         updatable.update(dt)
 
-        #check for asteroid collision wioth player
+        #check for asteroid collision with player
         for asteroid in asteroids:
             if asteroid.collision_with(player):
                 log_event("player_hit")
                 print("GAME OVER!")
                 sys.exit()
+
+        #check for asteroid collision with player
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collision_with(shot):
+                    log_event("asteroid_shot")
+                    asteroid.kill()
+                    shot.kill()
+
 
 
         # add background
