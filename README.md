@@ -1,10 +1,11 @@
 # Asteroid Game
 
 project from [boot.dev](https://boot.dev)
-Note: logger.py and asteroidfield.py modules were not written by me but retrieved from the [boot.dev](https://boot.dev)  website
+
+- Note: logger.py and asteroidfield.py modules were not written by me but retrieved from the [boot.dev](https://boot.dev)  website
 
 ## Requirement
-uv, python 
+uv, python 3.13 
 
 ## How to run
 
