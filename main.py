@@ -11,6 +11,7 @@ from modules import AsteroidField
 from modules import log_event
 from modules.shot import Shot
 
+
 def main():
     print(f"Starting Asteroids with the pygame version: {pygame.version.ver}")
     print("Screen width:", SCREEN_WIDTH)
@@ -19,24 +20,24 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock: Clock = pygame.time.Clock()
-    dt: int = 0 # delta time (time ellapsed between frames)
+    dt: int = 0  # delta time (time elapsed between frames)
 
-    #create groups to manage the game objects
+    # create groups to manage the game objects
     updatable: Group = pygame.sprite.Group()
     drawable: Group = pygame.sprite.Group()
     asteroids: Group = pygame.sprite.Group()
     shots: Group = pygame.sprite.Group()
 
-    #atribute groups to each class
-    Shot.containers = (shots, updatable, drawable)
+    # attribute groups to each class
+    Shot.containers = (shots, updatable, drawable)  # ty:ignore[unresolved-attribute]
 
-    AsteroidField.containers = updatable
+    AsteroidField.containers = updatable  # ty:ignore[unresolved-attribute]
     asteroidfield: AsteroidField = AsteroidField()
 
-    Asteroid.containers = (asteroids, updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)  # ty:ignore[unresolved-attribute]
 
-    Player.containers = (updatable, drawable)
-    player: Player = Player((SCREEN_WIDTH/2),(SCREEN_HEIGHT/2))
+    Player.containers = (updatable, drawable)  # ty:ignore[unresolved-attribute]
+    player: Player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
 
     while True:
         log_state()
@@ -48,14 +49,14 @@ def main():
         # update game state
         updatable.update(dt)
 
-        #check for asteroid collision with player
+        # check for asteroid collision with player
         for asteroid in asteroids:
             if asteroid.collision_with(player):
                 log_event("player_hit")
                 print("GAME OVER!")
                 sys.exit()
 
-        #check for asteroid collision with player
+        # check for asteroid collision with player
         for asteroid in asteroids:
             for shot in shots:
                 if asteroid.collision_with(shot):
@@ -63,22 +64,19 @@ def main():
                     asteroid.split()
                     shot.kill()
 
-
-
         # add background
         screen.fill("black")
 
-        # draw items 
+        # draw items
         for item in drawable:
             item.draw(screen)
 
         # render all to screen
         pygame.display.flip()
-        
+
         # manage FPS
-        clock.tick(60) 
-        dt: int= clock.tick(60)/1000
-        
+        clock.tick(60)
+        dt: int = clock.tick(60) / 1000  # ty:ignore[invalid-assignment]
 
 
 if __name__ == "__main__":
