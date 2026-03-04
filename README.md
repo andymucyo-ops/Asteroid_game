@@ -2,7 +2,7 @@
 
 project from [boot.dev](https://boot.dev)
 
-- Note: logger.py and asteroidfield.py modules were not written by me but but provides by [boot.dev](https://boot.dev)
+- Note: logger.py and asteroidfield.py modules were not written by me but provides by [boot.dev](https://boot.dev)
 
 ## Requirement
 uv, python 3.13 
